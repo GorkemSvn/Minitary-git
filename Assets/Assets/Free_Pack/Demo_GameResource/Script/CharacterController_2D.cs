@@ -58,12 +58,6 @@ public class CharacterController_2D : MonoBehaviour {
         Move_Fuc();
 
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-       
-
-
-        m_Animator.SetFloat("MoveSpeed", Mathf.Abs(h )+Mathf.Abs (v));
 
  
     }
@@ -112,39 +106,44 @@ public class CharacterController_2D : MonoBehaviour {
     // character Move Function
     void Move_Fuc()
     {
+        Vector3 deltaPos=transform.position;
         if (Input.GetKey(KeyCode.A))
         {
           //  Debug.Log("Left");
-            m_rigidbody.AddForce(Vector2.left * MoveSpeed);
-            if (B_FacingRight)
+            transform.position+=(Vector3.left * MoveSpeed)*Time.deltaTime;
+            if (!B_FacingRight)
                 Filp();
 
 
         }
         else if (Input.GetKey(KeyCode.D))
         {
-          //  Debug.Log("Right");
-            m_rigidbody.AddForce(Vector2.right * MoveSpeed);
-            if (!B_FacingRight)
+            //  Debug.Log("Right");
+            transform.position += (Vector3.right * MoveSpeed) * Time.deltaTime;
+            if (B_FacingRight)
                 Filp();
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-           // Debug.Log("up");
-            m_rigidbody.AddForce(Vector2.up * MoveSpeed);
-          
+            // Debug.Log("up");
+            transform.position += (Vector3.forward * MoveSpeed) * Time.deltaTime;
+
         }
         else if (Input.GetKey(KeyCode.S))
         {
-           // Debug.Log("Down");
-            m_rigidbody.AddForce(Vector2.down * MoveSpeed);
-          
-            
+            // Debug.Log("Down");
+            transform.position += (Vector3.back * MoveSpeed) * Time.deltaTime;
+
+
         }
+        deltaPos = transform.position - deltaPos;
+        float deltaPosSqrm = deltaPos.sqrMagnitude/(Time.deltaTime*Time.deltaTime);
+        if(deltaPos.sqrMagnitude>0)
+            m_Animator.SetFloat("MoveSpeed", 1);
+        else
+            m_Animator.SetFloat("MoveSpeed", 0);
 
-
-     
 
     }
 

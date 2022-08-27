@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3334415985679656743}
   - component: {fileID: 3516829517350671518}
   m_Layer: 0
-  m_Name: Castle2
+  m_Name: Barrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798cac97053eb9b46a633b2d6dd9db37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 203fbcd3a96362940a9663f359bd41db, type: 3}
   hoverColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   selectedColor: {r: 0.12775902, g: 0.5891518, b: 0.9339623, a: 1}
   pasiveColor: {r: 0, g: 0, b: 0, a: 1}

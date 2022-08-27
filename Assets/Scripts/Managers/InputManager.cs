@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public static event InputEvent OnTileSelected;
-    public static event InputEvent OnTileHover;
+    public static event InputEvent OnSelection;
+    public static event InputEvent OnHover;
 
     public Selectable selected { get; private set; }
 
@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
             lastSelected = selectable;
 
             selectable.Hover();
-            OnTileHover?.Invoke(selectable);
+            OnHover?.Invoke(selectable);
         }
 
         if (Input.GetMouseButtonDown(0)&&selectable!=null)
@@ -35,7 +35,7 @@ public class InputManager : MonoBehaviour
             selected?.Deselecet();
             selected = selectable;
             selectable.Select();
-            OnTileSelected?.Invoke(selectable);
+            OnSelection?.Invoke(selectable);
         }
 
         if (Input.GetMouseButtonDown(1))

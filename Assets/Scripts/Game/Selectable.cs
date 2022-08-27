@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Selectable : MonoBehaviour
 {
     public bool selected { get; private set; }
-
+    public Sprite icon;
     [SerializeField] protected Color hoverColor, selectedColor,pasiveColor;
 
     protected SpriteRenderer renderer;
