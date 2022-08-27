@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController_2D : MonoBehaviour {
-
-  
-
-
-    
+public class CharacterController_2D : Selectable
+{    
     Rigidbody2D m_rigidbody;
     Animator m_Animator;
     Transform m_tran;
@@ -24,6 +20,7 @@ public class CharacterController_2D : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        transform.eulerAngles = new Vector3(90, 0, 0);
         m_rigidbody = this.GetComponent<Rigidbody2D>();
         m_Animator = this.transform.Find("BURLY-MAN_1_swordsman_model").GetComponent<Animator>();
         m_tran = this.transform;

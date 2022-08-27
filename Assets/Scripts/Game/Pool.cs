@@ -19,6 +19,7 @@ public class Pool : ScriptableObject
             GameObject obj = Instantiate(prefab);
             obj.SetActive(false);
             queue.Enqueue(obj);
+            obj.name = prefab.name;
         }
         instantiated = true;
     }

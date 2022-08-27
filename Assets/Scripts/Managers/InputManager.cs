@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance { get; private set; }
     public static event InputEvent OnSelection;
     public static event InputEvent OnHover;
 
@@ -16,10 +17,14 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         cam = Camera.main;
     }
     void Update()
     {
+        if (UiManager.instance.IsPointerOnUi())
+            return;
+
         Selectable selectable = RayCatch();
         if (selectable != null && selectable!=lastSelected)
         {

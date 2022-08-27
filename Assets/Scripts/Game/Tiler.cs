@@ -34,6 +34,7 @@ public class Tiler : MonoBehaviour
                 var spawn=tilePool.Spawn(new Vector3(x, 0, z));
             }
         }
+        Physics.SyncTransforms();
     }
 
     public static Vector3 RoundVector(Vector3 vector)

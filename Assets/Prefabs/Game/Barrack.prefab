@@ -114,6 +114,11 @@ MonoBehaviour:
   hoverColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   selectedColor: {r: 0.12775902, g: 0.5891518, b: 0.9339623, a: 1}
   pasiveColor: {r: 0, g: 0, b: 0, a: 1}
+  producables:
+  - product: {fileID: 114243888756026540, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+    producingTimeLenght: 10
+    quantityPerProduct: 1
+  instantiatingPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &9006581976538462475
 GameObject:
   m_ObjectHideFlags: 0
