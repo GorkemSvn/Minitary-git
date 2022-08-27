@@ -96,7 +96,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.000002, y: 4.000001, z: 0.200001}
+  m_Size: {x: 4.000002, y: 4.000001, z: 0.25}
   m_Center: {x: 0, y: 0, z: 0.04}
 --- !u!114 &3516829517350671518
 MonoBehaviour:
@@ -110,8 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798cac97053eb9b46a633b2d6dd9db37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHoverColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
-  onSelectedColor: {r: 0, g: 0.93155813, b: 1, a: 0}
+  hoverColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+  selectedColor: {r: 0.12775902, g: 0.5891518, b: 0.9339623, a: 1}
+  pasiveColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &9006581976538462475
 GameObject:
   m_ObjectHideFlags: 0

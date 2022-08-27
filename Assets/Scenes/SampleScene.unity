@@ -123,6 +123,71 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &483114055
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1892420787937326, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_Name
+      value: BURLY-MAN_1_swordsman
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778132919960642, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.248
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985777773331140, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,50 +650,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3334415985679656743, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: m_Size.z
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: hoverColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: hoverColor.b
-      value: 0.5566038
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: hoverColor.g
-      value: 0.5566038
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: hoverColor.r
-      value: 0.5566038
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: pasiveColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: selectedColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: selectedColor.b
-      value: 0.9339623
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: selectedColor.g
-      value: 0.5891518
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: selectedColor.r
-      value: 0.12775902
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-      propertyPath: onSelectedColor.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8262550192686084185, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
       propertyPath: m_Name
       value: Castle2
