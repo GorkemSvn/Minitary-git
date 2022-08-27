@@ -10,6 +10,8 @@ public class Tile : Selectable
 
     public override void Select()
     {
+        if (blocked)
+            return;
         base.Select();
         tilePool?.Exclude(gameObject);
     }
