@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3334415985679656743}
   - component: {fileID: 3516829517350671518}
   m_Layer: 0
-  m_Name: Barrack
+  m_Name: Farm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 203fbcd3a96362940a9663f359bd41db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c4fa417448c46c419347d1f01412cc7, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.000002, y: 4, z: 2}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0.04}
 --- !u!114 &3516829517350671518
 MonoBehaviour:
@@ -115,14 +115,14 @@ MonoBehaviour:
   selectedColor: {r: 0.12775902, g: 0.5891518, b: 0.9339623, a: 1}
   pasiveColor: {r: 0, g: 0, b: 0, a: 1}
   units:
-  - name: Soldier
-    icon: {fileID: 21300000, guid: f782ada428eba8b40a92286f440060c8, type: 3}
-    meatCost: 5
-    product: {fileID: -2039912973711739629, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
-    producingTimeLenght: 10
+  - name: Meat
+    icon: {fileID: 21300000, guid: 5fe9133a295ed784b850bb55cd42165d, type: 3}
+    product: {fileID: 3514370543143704965, guid: 9068d82c2c24e914688698bfdcb40754, type: 3}
+    producingTimeLenght: 1
     quantityPerProduct: 1
+    foodCost: 0
     progressTime: 0
-  localInstantiatingPoing: {x: 0, y: -2.52, z: 0}
+  localInstantiatingPoing: {x: 0, y: -1.37, z: 0}
 --- !u!1 &9006581976538462475
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 203fbcd3a96362940a9663f359bd41db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c4fa417448c46c419347d1f01412cc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

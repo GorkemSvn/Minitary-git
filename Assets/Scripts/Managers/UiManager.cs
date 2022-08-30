@@ -7,48 +7,36 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager instance { get; private set; }
 
-    [SerializeField] Transform productsParent;
-    [SerializeField] Text titleText;
-    [SerializeField] Image iconImage;
-    [SerializeField] SelfReportingButton productButton;
     [SerializeField] EventSystem eventSystem;
+    [SerializeField] Text meatText;
+    [SerializeField] ProductionLine productionLine;
+    [SerializeField] UnitActions unitActionsPanel;
 
     private void Awake()
     {
         instance = this;
         InputManager.OnSelection += OnSelect;
+        unitActionsPanel.OnActionSelected += GetUnitPRoductionRequest;
+        productionLine.OnProductSelected += CancelPRoduct;
+        Meat.OnMeatChange += UpdateMeat;
+    }
+
+    void UpdateMeat()
+    {
+        meatText.text = ":" + Meat.meatCount;
     }
 
     void OnSelect(Selectable selected)
     {
-        titleText.text = selected.name;
-        iconImage.sprite = selected.icon;
+        unitActionsPanel.SetHeader(selected.name, selected.icon);
 
-        switch (selected)
-        {
-            case Tile tile:
+        var building = selected as Building;
+        UpdateActionPanel(selected.utilities);
+        UpdateProductionLine(building);
 
-                for (int i = productsParent.childCount - 1; i >=0; i--)
-                {
-                    Destroy(productsParent.GetChild(i).gameObject);
-                }
-
-                break;
-            case Building building:
-                HandleBuilding(building);
-                // code block
-                break;
-
-            case null:
-                break;
-
-            default:
-                // code block
-                break;
-        }
     }
 
-    public bool IsPointerOnUi()
+    public List<RaycastResult> IsPointerOnUi()
     {
         //Set up the new Pointer Event
         var m_PointerEventData = new PointerEventData(eventSystem);
@@ -62,45 +50,50 @@ public class UiManager : MonoBehaviour
         var raycaster = GetComponent<GraphicRaycaster>();
         raycaster.Raycast(m_PointerEventData, results);
 
-        return results.Count>0;
+        return results;
     }
 
-    void HandleBuilding(Building barrack)
+    void CancelPRoduct(int i)
     {
-        //transform buttons
-        for (int i = 0; i < Mathf.Min(productsParent.childCount, barrack.products.Count); i++)
+        var building=InputManager.instance.selected as Building;
+        building.Cancel(i);
+        UpdateProductionLine(building);
+    }
+    void GetUnitPRoductionRequest(int index)
+    {
+        var selected=InputManager.instance.selected;
+        selected.utilities[index].Trigger();
+
+        UpdateProductionLine(selected as Building);
+    }
+    void UpdateActionPanel(List<Selectable.Utility> utilities)
+    {
+
+        List<string> names = new List<string>();
+        if (utilities != null)
         {
-            productsParent.GetChild(i).GetComponentInChildren<Text>().text = barrack.products[i].product.name;
-        }
-        //add more buttons if necesare
-        if (barrack.products.Count > productsParent.childCount)
-        {
-            for (int i = productsParent.childCount; i < barrack.products.Count; i++)
+            foreach (var item in utilities)
             {
-                MakeButton( barrack.products[i].product.name);
+                names.Add(item.name +": "+ item.meatCost+" meat");
             }
         }
-        //remove excess buttons
-        else if (productsParent.childCount > barrack.products.Count)
+        unitActionsPanel.SetButtons(names);
+    }
+    void UpdateProductionLine(Building building)
+    {
+
+        //update production time
+        List<(string, float, float)> infoes = new List<(string, float, float)>();
+
+        if(building!=null)
         {
-            for (int i = productsParent.childCount - 1; i >= barrack.products.Count; i--)
+            foreach (var item in building.inProduct)
             {
-                Destroy(productsParent.GetChild(i).gameObject);
+                infoes.Add((item.product.name, item.progressTime, item.producingTimeLenght));
+
             }
         }
-    }
 
-    SelfReportingButton MakeButton(string name)
-    {
-        var button = Instantiate(productButton, productsParent);
-        button.GetComponentInChildren<Text>().text = name;
-        button.onClick += GetRequest;
-        return button;
-    }
-
-    void GetRequest(int index)
-    {
-        var building=InputManager.instance.selected as Building ;
-        building.Produce(building.products[index]);
+        productionLine.SetButtons(infoes);
     }
 }

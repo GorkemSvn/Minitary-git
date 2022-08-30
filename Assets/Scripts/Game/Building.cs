@@ -4,50 +4,102 @@ using UnityEngine;
 
 public class Building : Selectable
 {
-    public int size = 4;
-    public float buildingTime = 60f;
-    [SerializeField] List<Product> producables;
+
+    [SerializeField] List<UnitProduction> units;
     [SerializeField] Vector3 localInstantiatingPoing;
-    public List<Product> products { get { return producables; } }
-    public List<Product> inProduct { get; private set; }
+    public List<UnitProduction> products { get { return units; } }
+    public List<UnitProduction> inProduct { get; private set; }
 
-
+    List<IEnumerator> productionLine = new List<IEnumerator>();
+    Coroutine production;
     protected override void Awake()
     {
         base.Awake();
-        inProduct = new List<Product>();
+        inProduct = new List<UnitProduction>();
+        transform.eulerAngles = Vector3.right * 90f;
 
     }
     private void Start()
     {
-        Vector3 halfExtends = (Vector3.one * (size-0.5f)) / 2f;
-        var cols = Physics.OverlapBox(transform.position, halfExtends, Quaternion.identity);
+        foreach (var unit in units)
+            unit.UtilityTriggered = Produce;
+
+        production = StartCoroutine(ProductionProcess());
+
+        Vector3 halfExtends = (Vector3.one * (GetComponent<BoxCollider>().size.x - 0.5f)) / 2f;
+        var cols = Physics.OverlapBox(transform.position + Vector3.one / 2f, halfExtends, Quaternion.identity);
+        var dustes = new List<ParticleSystem>();
         foreach (var col in cols)
         {
             Tile tile = col.GetComponent<Tile>();
-            if (tile != null)
+            if (tile == null)
+                continue;
+
+            dustes.Add(tile.GetComponentInChildren<ParticleSystem>());
+            if (tile.blocked)
+                return;
+            else
                 tile.SetBlockage(true);
+
         }
     }
-
-    public void Produce(Product product)
+        IEnumerator ProductionProcess()
     {
-        if (producables.Contains(product))
+        while (gameObject)
         {
-            StartCoroutine(ProducingProcess(product));
+            yield return new WaitForEndOfFrame();
+            if (productionLine.Count > 0)
+            {
+                yield return productionLine[0];
+                productionLine.RemoveAt(0);
+            }
         }
     }
 
-    IEnumerator ProducingProcess(Product product)
+    public void Produce(Utility util)
     {
-        inProduct.Add(product);
-        yield return new WaitForSeconds(product.producingTimeLenght);
+        var unit = util as UnitProduction;
+        if (units.Contains(unit))
+        {
+            unit = unit.Clone();
+            inProduct.Add(unit);
+            productionLine.Add(ProducingProcess(unit));
+        }
+    }
+    public void Cancel(int i)
+    {
+        if (i < inProduct.Count)
+        {
+            inProduct.RemoveAt(i);
+            productionLine.RemoveAt(i);
+            StopCoroutine(production);
+            production = StartCoroutine(ProductionProcess());
+        }
+    }
+
+    protected override List<Utility> GetUtilities()
+    {
+        var utils = new List<Utility>();
+        utils.AddRange(units);
+        return utils;
+    }
+
+    IEnumerator ProducingProcess(UnitProduction product)
+    {
+        for (float t = 0; t < product.producingTimeLenght; t+=Time.fixedDeltaTime)
+        {
+            product.progressTime = t;
+            yield return new WaitForFixedUpdate();
+        }
+
         inProduct.Remove(product);
+
         for (int i = 0; i < product.quantityPerProduct; i++)
         {
             Instantiate(product.product,transform.TransformPoint(localInstantiatingPoing), Quaternion.identity);
         }
     }
+
 
     private void OnDrawGizmosSelected()
     {
@@ -56,10 +108,23 @@ public class Building : Selectable
         //Gizmos.DrawCube(transform.position, Vector3.one * size);
     }
     [System.Serializable]
-    public struct Product
+    public class UnitProduction:Utility
     {
         public Selectable product;
         public float producingTimeLenght;
         public int quantityPerProduct;
+        [HideInInspector]public float progressTime;
+
+        public UnitProduction Clone()
+        {
+            var clone = new UnitProduction();
+            clone.product = product;
+            clone.producingTimeLenght = producingTimeLenght;
+            clone.quantityPerProduct = quantityPerProduct;
+            clone.progressTime = 0;
+            return clone;
+        }
+
     }
+
 }

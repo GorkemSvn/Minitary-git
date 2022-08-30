@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController_2D : Selectable
+public class CharacterController_2D:MonoBehaviour
 {    
     Rigidbody2D m_rigidbody;
     Animator m_Animator;
@@ -20,7 +20,6 @@ public class CharacterController_2D : Selectable
 
     // Use this for initialization
     void Start () {
-        transform.eulerAngles = new Vector3(90, 0, 0);
         m_rigidbody = this.GetComponent<Rigidbody2D>();
         m_Animator = this.transform.Find("BURLY-MAN_1_swordsman_model").GetComponent<Animator>();
         m_tran = this.transform;
@@ -53,10 +52,6 @@ public class CharacterController_2D : Selectable
             return;
 
         Move_Fuc();
-
-
-
- 
     }
     public void Attack1(bool secondAttack=false)
     {
@@ -104,7 +99,8 @@ public class CharacterController_2D : Selectable
     void Move_Fuc()
     {
         Vector3 deltaPos=transform.position;
-        if (Input.GetKey(KeyCode.A))
+       /*
+        * if (Input.GetKey(KeyCode.A))
         {
           //  Debug.Log("Left");
             transform.position+=(Vector3.left * MoveSpeed)*Time.deltaTime;
@@ -134,6 +130,7 @@ public class CharacterController_2D : Selectable
 
 
         }
+       */
         deltaPos = transform.position - deltaPos;
         float deltaPosSqrm = deltaPos.sqrMagnitude/(Time.deltaTime*Time.deltaTime);
         if(deltaPos.sqrMagnitude>0)
@@ -158,13 +155,4 @@ public class CharacterController_2D : Selectable
 
         m_tran.localScale = theScale;
     }
-
-
- 
-    //   Sword,Dagger,Spear,Punch,Bow,Gun,Grenade
-
-
-  
-
-  
 }

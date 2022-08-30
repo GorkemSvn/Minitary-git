@@ -22,9 +22,16 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        if (UiManager.instance.IsPointerOnUi())
+        var uiResults = UiManager.instance.IsPointerOnUi();
+        if (uiResults.Count > 0)
+        {
+            var productionLine = uiResults[0].gameObject.GetComponent<ProductionLine>();
+            if (productionLine != null)
+                productionLine.Scroll(Input.mouseScrollDelta.y*10f);
             return;
+        }
 
+        //hovering
         Selectable selectable = RayCatch();
         if (selectable != null && selectable!=lastSelected)
         {
@@ -34,7 +41,7 @@ public class InputManager : MonoBehaviour
             selectable.Hover();
             OnHover?.Invoke(selectable);
         }
-
+        //selection
         if (Input.GetMouseButtonDown(0)&&selectable!=null)
         {
             selected?.Deselecet();
@@ -42,7 +49,7 @@ public class InputManager : MonoBehaviour
             selectable.Select();
             OnSelection?.Invoke(selectable);
         }
-
+        //cam movement
         if (Input.GetMouseButtonDown(1))
         {
             rightClickPos = Input.mousePosition;
@@ -51,6 +58,12 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             cam.transform.position = TransformVerticalToHorizontal(rightClickPos - Input.mousePosition) *0.01f + camRCP;
+        }
+
+        //action
+        if (Input.GetMouseButtonUp(1))
+        {
+            selected?.ActOn(RayCatch());
         }
     }
 

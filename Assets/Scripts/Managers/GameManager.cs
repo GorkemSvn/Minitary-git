@@ -12,5 +12,6 @@ namespace Managers
         {
             instance = this;//overriding is intentional
         }
+        
     }
 }
