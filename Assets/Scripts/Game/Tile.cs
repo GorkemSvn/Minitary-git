@@ -111,11 +111,13 @@ public class Tile : Selectable
         public Building building;
         public int size = 4;
         public float buildingTime = 60f;
-        public int meatCost = 5;
 
         protected override bool Requirements()
         {
-            return (Selectable.lastSelected as Tile).BuilabilityInSize(size)&& base.Requirements();
+            if(Selectable.lastSelected!=null && Selectable.lastSelected is Tile tile)
+                return tile.BuilabilityInSize(size) && base.Requirements();
+
+            return false;
         }
     }
 }

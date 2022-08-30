@@ -19,25 +19,23 @@ public class Building : Selectable
         transform.eulerAngles = Vector3.right * 90f;
 
     }
-    private void Start()
+    private IEnumerator Start()
     {
         foreach (var unit in units)
             unit.UtilityTriggered = Produce;
 
         production = StartCoroutine(ProductionProcess());
 
-        Vector3 halfExtends = (Vector3.one * (GetComponent<BoxCollider>().size.x - 0.5f)) / 2f;
-        var cols = Physics.OverlapBox(transform.position + Vector3.one / 2f, halfExtends, Quaternion.identity);
-        var dustes = new List<ParticleSystem>();
+        //tile blocking must be done when the building is preconstructed in editor
+        yield return new WaitForEndOfFrame();
+        Vector3 halfExtends = (Vector3.one * (GetComponent<BoxCollider>().size.x)) / 2f - 0.55f*Vector3.one;
+        var cols = Physics.OverlapBox(transform.position, halfExtends, Quaternion.identity);
         foreach (var col in cols)
         {
             Tile tile = col.GetComponent<Tile>();
             if (tile == null)
                 continue;
 
-            dustes.Add(tile.GetComponentInChildren<ParticleSystem>());
-            if (tile.blocked)
-                return;
             else
                 tile.SetBlockage(true);
 
