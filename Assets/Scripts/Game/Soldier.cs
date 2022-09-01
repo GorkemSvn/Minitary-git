@@ -103,7 +103,8 @@ public class Soldier : Selectable
             AStarTile startTile = new AStarTile(targetPos, startPos, startPos, null);
             analyzers.Add(startTile.pos, startTile);
             startTile.Explore();
-            while (!pathComplete)
+
+            for (int x = 0; x < 10000; x++)
             {
                 List<AStarTile> sortedList = new List<AStarTile>();
                 foreach (var item in analyzers)
@@ -126,6 +127,7 @@ public class Soldier : Selectable
                     }
                 }
             }
+
 
         }
         static void MakePath(AStarTile tile)
