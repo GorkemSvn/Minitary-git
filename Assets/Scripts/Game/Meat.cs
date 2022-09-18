@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Meat : Selectable
 {
-    public static int meatCount { get; private set; }
+    public static int meatCount { get; private set; } = 100;
     public static event MeatEvent OnMeatChange;
     protected override void Awake()
     {

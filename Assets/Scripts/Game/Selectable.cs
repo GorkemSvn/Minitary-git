@@ -48,14 +48,18 @@ public abstract class Selectable : MonoBehaviour
 
     }
 
+    public virtual void UseUtility(Utility utility)
+    {
+
+    }
+
     protected virtual List<Utility> GetUtilities()
     {
         return null;
     }
 
-    public abstract class Utility
+    public abstract class Utility:ScriptableObject
     {
-        public string name;
         public Sprite icon;
         public UtilityAction UtilityTriggered;
         public int meatCost;

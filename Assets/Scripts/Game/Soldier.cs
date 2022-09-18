@@ -5,20 +5,57 @@ using DG.Tweening;
 
 public class Soldier : Selectable
 {
+    Coroutine moveCo;
+    Selectable target;
     private void Start()
     {
         transform.eulerAngles = new Vector3(90, 0, 0);
+        Building.OnBuildingStart +=OnBuildingStart;
     }
     public override void ActOn(Selectable target)
     {
         if(target is Tile tile && !tile.blocked)
         {
+            this.target = target;
             AStarSearch.FindWay(transform.position, tile.transform.position);
             var poss = AStarSearch.path.ToArray();
             poss[0] = transform.position;
-            transform.DOKill();
-            transform.DOPath(poss, AStarSearch.path.Count/2f).SetEase(Ease.Linear);
+
+            if(moveCo!=null)
+                StopCoroutine(moveCo);
+
+            moveCo=StartCoroutine(ManualPath(poss, 0.5f));
         }
+
+    }
+
+    IEnumerator ManualPath(Vector3[] poses,float timeInterval)
+    {
+        for (int i = 1; i < poses.Length; i++)
+        {
+            Vector3 targetPos = poses[i];
+            Vector3 startPos = transform.position;
+            Tile targetTile = Tile.GetTileAtPosition(targetPos);
+            if (targetTile == null || targetTile.blocked)
+                break;
+
+            for (float t = 0; t < timeInterval; t+=Time.fixedDeltaTime)
+            {
+                transform.position = Vector3.Lerp(startPos, targetPos, t / timeInterval);
+                yield return new WaitForFixedUpdate();
+            }
+        }
+        moveCo = null;
+    }
+
+    void OnBuildingStart()
+    {
+        //
+    }
+    private void OnDestroy()
+    {
+        Building.OnBuildingStart -= OnBuildingStart;
+
     }
 
     class AStarTile

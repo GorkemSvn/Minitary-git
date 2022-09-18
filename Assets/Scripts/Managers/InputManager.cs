@@ -25,9 +25,6 @@ public class InputManager : MonoBehaviour
         var uiResults = UiManager.instance.IsPointerOnUi();
         if (uiResults.Count > 0)
         {
-            var productionLine = uiResults[0].gameObject.GetComponent<ProductionLine>();
-            if (productionLine != null)
-                productionLine.Scroll(Input.mouseScrollDelta.y*10f);
             return;
         }
 

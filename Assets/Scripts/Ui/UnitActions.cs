@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UnitActions : MonoBehaviour
 {
     [SerializeField] Text titleText;
-    [SerializeField] Text infoText;
     [SerializeField] Image iconImage;
     [SerializeField] SelfReportingButton sRButtonPrefab;
     [SerializeField] Transform layout;

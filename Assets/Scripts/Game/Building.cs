@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building : Selectable
 {
-
+    public static event BuildingEvent OnBuildingStart;
     [SerializeField] List<UnitProduction> units;
     [SerializeField] Vector3 localInstantiatingPoing;
     public List<UnitProduction> products { get { return units; } }
@@ -24,7 +24,6 @@ public class Building : Selectable
         foreach (var unit in units)
             unit.UtilityTriggered = Produce;
 
-        production = StartCoroutine(ProductionProcess());
 
         //tile blocking must be done when the building is preconstructed in editor
         yield return new WaitForEndOfFrame();
@@ -36,10 +35,10 @@ public class Building : Selectable
             if (tile == null)
                 continue;
 
-            else
-                tile.SetBlockage(true);
 
         }
+        yield return new WaitForEndOfFrame();
+        production = StartCoroutine(ProductionProcess());
     }
         IEnumerator ProductionProcess()
     {
@@ -84,6 +83,7 @@ public class Building : Selectable
 
     IEnumerator ProducingProcess(UnitProduction product)
     {
+        OnBuildingStart?.Invoke();
         for (float t = 0; t < product.producingTimeLenght; t+=Time.fixedDeltaTime)
         {
             product.progressTime = t;
@@ -98,31 +98,12 @@ public class Building : Selectable
         }
     }
 
-
+    public delegate void BuildingEvent();
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.TransformPoint(localInstantiatingPoing), 0.5f);
         //Gizmos.DrawCube(transform.position, Vector3.one * size);
-    }
-    [System.Serializable]
-    public class UnitProduction:Utility
-    {
-        public Selectable product;
-        public float producingTimeLenght;
-        public int quantityPerProduct;
-        [HideInInspector]public float progressTime;
-
-        public UnitProduction Clone()
-        {
-            var clone = new UnitProduction();
-            clone.product = product;
-            clone.producingTimeLenght = producingTimeLenght;
-            clone.quantityPerProduct = quantityPerProduct;
-            clone.progressTime = 0;
-            return clone;
-        }
-
     }
 
 }

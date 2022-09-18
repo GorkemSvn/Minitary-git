@@ -110,18 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798cac97053eb9b46a633b2d6dd9db37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 203fbcd3a96362940a9663f359bd41db, type: 3}
+  icon: {fileID: 21300000, guid: 2c4fa417448c46c419347d1f01412cc7, type: 3}
   hoverColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   selectedColor: {r: 0.12775902, g: 0.5891518, b: 0.9339623, a: 1}
   pasiveColor: {r: 0, g: 0, b: 0, a: 1}
   units:
-  - name: Meat
-    icon: {fileID: 21300000, guid: 5fe9133a295ed784b850bb55cd42165d, type: 3}
-    product: {fileID: 3514370543143704965, guid: 9068d82c2c24e914688698bfdcb40754, type: 3}
-    producingTimeLenght: 1
-    quantityPerProduct: 1
-    foodCost: 0
-    progressTime: 0
+  - {fileID: 11400000, guid: acd8c4e759a164d4b8bc6feebbb1d82c, type: 2}
   localInstantiatingPoing: {x: 0, y: -1.37, z: 0}
 --- !u!1 &9006581976538462475
 GameObject:

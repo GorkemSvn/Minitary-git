@@ -7,8 +7,17 @@ public class ProductionLine : MonoBehaviour
 {
     [SerializeField] SRCountdownButton selfReportingCountdownButton;
     [SerializeField] GridLayoutGroup layout;
+
     public event ProductionLineSelection OnProductSelected;
+
     List<(string, float, float)> memo;
+    RectTransform layoutRect;
+    Vector2 targetPos;
+    private void Awake()
+    {
+        layoutRect = layout.GetComponent<RectTransform>();
+        targetPos = layoutRect.anchoredPosition;
+    }
     public void SetButtons(List<(string,float,float)> ps)
     {
         memo = ps;
@@ -23,11 +32,12 @@ public class ProductionLine : MonoBehaviour
         }
     }
 
-    public void Scroll(float deltaPos)
+    private void Update()
     {
-        var rt = layout.GetComponent<RectTransform>();
-        rt.anchoredPosition += deltaPos * Vector2.up;
+        targetPos += Input.mouseScrollDelta*10f;
+        layoutRect.anchoredPosition = Vector2.Lerp(layoutRect.anchoredPosition, targetPos,Time.deltaTime*4f);
     }
+
 
     void TimeOut(int i)
     {

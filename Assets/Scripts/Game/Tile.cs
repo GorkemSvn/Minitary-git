@@ -12,8 +12,14 @@ public class Tile : Selectable
     protected override void Awake()
     {
         base.Awake();
+
         foreach (var st in structures)
             st.UtilityTriggered = Build;
+    }
+
+    private void Update()
+    {
+        
     }
 
     public override void Select()
@@ -92,7 +98,18 @@ public class Tile : Selectable
         utils.AddRange(structures);
         return utils;
     }
-
+    public static Tile GetTileAtPosition(Vector3 position)
+    {
+        position.y = 0;
+        var cols = Physics.OverlapBox(position, Vector3.one*0.1f, Quaternion.identity);
+        foreach (var col in cols)
+        {
+            Tile tile = col.GetComponent<Tile>();
+            if (tile != null)
+                return tile;
+        }
+        return null;
+    }
     IEnumerator BuildingProcess(List<ParticleSystem> dustes, Building building,float buildTime)
     {
         //enable dust vfx
@@ -104,20 +121,5 @@ public class Tile : Selectable
             dust.Stop();
         //disable dust vfx, maybe trigger some finishing vfxx
         Instantiate(building, transform.position + Vector3.one / 2f, Quaternion.identity);
-    }
-    [System.Serializable]
-    public class Structure : Utility
-    {
-        public Building building;
-        public int size = 4;
-        public float buildingTime = 60f;
-
-        protected override bool Requirements()
-        {
-            if(Selectable.lastSelected!=null && Selectable.lastSelected is Tile tile)
-                return tile.BuilabilityInSize(size) && base.Requirements();
-
-            return false;
-        }
     }
 }

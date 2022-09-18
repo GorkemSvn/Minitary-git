@@ -115,13 +115,7 @@ MonoBehaviour:
   selectedColor: {r: 0.12775902, g: 0.5891518, b: 0.9339623, a: 1}
   pasiveColor: {r: 0, g: 0, b: 0, a: 1}
   units:
-  - name: Soldier
-    icon: {fileID: 21300000, guid: f782ada428eba8b40a92286f440060c8, type: 3}
-    meatCost: 5
-    product: {fileID: -2039912973711739629, guid: 8cc81305d37e7f546ac8b6604aca1497, type: 3}
-    producingTimeLenght: 10
-    quantityPerProduct: 1
-    progressTime: 0
+  - {fileID: 11400000, guid: b247101e1eafcab40b07c731546c49e6, type: 2}
   localInstantiatingPoing: {x: 0, y: -2.52, z: 0}
 --- !u!1 &9006581976538462475
 GameObject:

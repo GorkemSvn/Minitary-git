@@ -102,18 +102,8 @@ MonoBehaviour:
   selectedColor: {r: 0.11534355, g: 0.9056604, b: 0.51191854, a: 1}
   pasiveColor: {r: 1, g: 1, b: 1, a: 1}
   structures:
-  - name: Barrack
-    icon: {fileID: 21300000, guid: 203fbcd3a96362940a9663f359bd41db, type: 3}
-    building: {fileID: 3516829517350671518, guid: 973721b39e3a9334ea845cf5bba1e173, type: 3}
-    size: 4
-    buildingTime: 10
-    meatCost: 50
-  - name: Farm
-    icon: {fileID: 21300000, guid: 9816c962cb200cf4683cb7b23bb6a6d8, type: 3}
-    building: {fileID: 3516829517350671518, guid: 00a887348189e4e45999900754bb4271, type: 3}
-    size: 2
-    buildingTime: 5
-    meatCost: 5
+  - {fileID: 11400000, guid: 7b34c7c3c87e47c43884dc057c471a17, type: 2}
+  - {fileID: 11400000, guid: 84c92d2dd56de944398f7d6bca5f780f, type: 2}
 --- !u!65 &3080618752374104714
 BoxCollider:
   m_ObjectHideFlags: 0

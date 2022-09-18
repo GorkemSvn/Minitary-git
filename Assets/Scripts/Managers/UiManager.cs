@@ -19,6 +19,8 @@ public class UiManager : MonoBehaviour
         unitActionsPanel.OnActionSelected += GetUnitPRoductionRequest;
         productionLine.OnProductSelected += CancelPRoduct;
         Meat.OnMeatChange += UpdateMeat;
+
+        UpdateMeat();
     }
 
     void UpdateMeat()

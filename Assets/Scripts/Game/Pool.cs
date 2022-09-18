@@ -7,9 +7,11 @@ public class Pool : ScriptableObject
 {
     public int size;
     public GameObject prefab;
+
     Queue<GameObject> queue;
     bool instantiated = false;
     HashSet<GameObject> excluded = new HashSet<GameObject>();
+
     public void Instantiate()
     {
         queue = new Queue<GameObject>();
@@ -90,6 +92,16 @@ public class Pool : ScriptableObject
             if (!queue.Contains(objt))
                 queue.Enqueue(objt);
         }
+    }
+
+    public void Reverse()
+    {
+        var list = new List<GameObject>();
+        list.AddRange(queue);
+        list.Reverse();
+        queue.Clear();
+        foreach (var itm in list)
+            queue.Enqueue(itm);
     }
 }
 
