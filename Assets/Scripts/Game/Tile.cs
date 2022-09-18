@@ -13,8 +13,6 @@ public class Tile : Selectable
     {
         base.Awake();
 
-        foreach (var st in structures)
-            st.UtilityTriggered = Build;
     }
 
     private void Update()
@@ -69,8 +67,15 @@ public class Tile : Selectable
         }
         return true;
     }
-
-    public void Build(Utility structure)
+    public override void UseUtility(Utility utility)
+    {
+        if (utility.Requirements())
+        {
+            Meat.Eat(utility.meatCost);
+            Build(utility as Structure);
+        }
+    }
+    protected void Build(Utility structure)
     {
         var strct = structure as Structure;
 

@@ -21,10 +21,6 @@ public class Building : Selectable
     }
     private IEnumerator Start()
     {
-        foreach (var unit in units)
-            unit.UtilityTriggered = Produce;
-
-
         //tile blocking must be done when the building is preconstructed in editor
         yield return new WaitForEndOfFrame();
         Vector3 halfExtends = (Vector3.one * (GetComponent<BoxCollider>().size.x)) / 2f - 0.55f*Vector3.one;
@@ -52,7 +48,14 @@ public class Building : Selectable
             }
         }
     }
-
+    public override void UseUtility(Utility utility)
+    {
+        if (utility.Requirements())
+        {
+            Meat.Eat(utility.meatCost);
+            Produce(utility);
+        }
+    }
     public void Produce(Utility util)
     {
         var unit = util as UnitProduction;

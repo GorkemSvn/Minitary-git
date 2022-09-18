@@ -61,18 +61,10 @@ public abstract class Selectable : MonoBehaviour
     public abstract class Utility:ScriptableObject
     {
         public Sprite icon;
-        public UtilityAction UtilityTriggered;
         public int meatCost;
-        public virtual void Trigger()
-        {
-            if (Requirements())
-            {
-                UtilityTriggered(this);
-                Meat.Eat(meatCost);
-            }
-        }
 
-        protected virtual bool Requirements()
+
+        public virtual bool Requirements()
         {
             return Meat.meatCount >= meatCost;
         }

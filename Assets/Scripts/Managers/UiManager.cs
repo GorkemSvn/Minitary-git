@@ -64,7 +64,7 @@ public class UiManager : MonoBehaviour
     void GetUnitPRoductionRequest(int index)
     {
         var selected=InputManager.instance.selected;
-        selected.utilities[index].Trigger();
+        selected.UseUtility(selected.utilities[index]);
 
         UpdateProductionLine(selected as Building);
     }

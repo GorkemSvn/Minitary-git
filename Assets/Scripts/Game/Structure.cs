@@ -9,7 +9,7 @@ public class Structure : Selectable.Utility
     public int size = 4;
     public float buildingTime = 60f;
 
-    protected override bool Requirements()
+    public override bool Requirements()
     {
         if (Selectable.lastSelected != null && Selectable.lastSelected is Tile tile)
             return tile.BuilabilityInSize(size) && base.Requirements();
